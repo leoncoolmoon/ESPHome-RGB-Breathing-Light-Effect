@@ -1,136 +1,298 @@
-   effects:
-         - lambda:
-            name: "Breathing"
-            update_interval: 16s
-            lambda: |-
-              static int state = 1;
-              static float brightness = 0.01;
-              auto values = id(ID).current_values; //the id of your light
-              brightness = state == 1?values.get_brightness():brightness;
-              auto call = id(ID).turn_on(); //the id of your light
-              call.set_transition_length(15000);
-              if (state == 0) 
-              {
-               call.set_brightness(brightness);
-              }
-               else if (state == 1)
-              {
-               call.set_brightness(0.01);
-              }
-               call.perform();
-               state ++;
-               if (state == 2){
-               state = 0;
-               }
-             
-         - lambda:
-            name: "Colour Changing"
-            update_interval: 16s
-            lambda: |-
-              #define Color1 1.0, 0.0, 0.0 //These are the colors defined, feel free to change or extend the list
-              #define Color2 1.0, 0.5, 0.0 //if you extend the list, dont forget to add them in the switch loop below
-              #define Color3 1.0, 1.0, 0.0 //and remember to adjust the reset counter at the bottom
-              #define Color4 0.5, 1.0, 0.0
-              #define Color5 0.0, 1.0, 0.0
-              #define Color6 0.0, 1.0, 0.5
-              #define Color7 0.0, 1.0, 1.0
-              #define Color8 0.0, 0.5, 1.0
-              #define Color9 0.0, 0.0, 1.0
-              #define Color10 0.5, 0.0, 1.0
-              #define Color11 1.0, 0.0, 1.0
-              #define Color12 1.0, 0.0, 0.5
-              static int color = 1;
-              auto call = id(ID).turn_on(); //the id of your light
-              call.set_transition_length(15000);
-               switch(color)
-               {
-                 case 1: call.set_rgb(Color1);
-                         break;
-                 case 2: call.set_rgb(Color2);
-                         break;
-                 case 3: call.set_rgb(Color3);
-                         break;
-                 case 4: call.set_rgb(Color4);
-                         break;
-                 case 5: call.set_rgb(Color5);
-                         break;
-                 case 6: call.set_rgb(Color6);
-                         break;
-                 case 7: call.set_rgb(Color7);
-                         break;
-                 case 8: call.set_rgb(Color8);
-                         break;
-                 case 9: call.set_rgb(Color9);
-                         break;
-                 case 10: call.set_rgb(Color10);
-                          break;
-                 case 11: call.set_rgb(Color11);
-                          break;
-                 case 12: call.set_rgb(Color12);
-                          break;
-               }
-               color++;
-               if(color == 13)
-               {
-                 color = 1;
-               }
-               call.perform();
-                 
-         - lambda:
-            name: "Colour Breathing"
-            update_interval: 16s
-            lambda: |-
-              static int state = 1;
-              static int color = 1;
-              static float brightness = 0.01;
-              auto values = id(ID).current_values; //the id of your light
-              brightness = state == 1?values.get_brightness():brightness;
-              auto call = id(ID).turn_on(); //the id of your light
-              call.set_transition_length(15000);
-              if (state == 0) 
-              {
-               call.set_brightness(brightness);
-              }
-               else if (state == 1)
-              {
-               switch(color)
-               {
-                 case 1: call.set_rgb(Color1);
-                         break;
-                 case 2: call.set_rgb(Color2);
-                         break;
-                 case 3: call.set_rgb(Color3);
-                         break;
-                 case 4: call.set_rgb(Color4);
-                         break;
-                 case 5: call.set_rgb(Color5);
-                         break;
-                 case 6: call.set_rgb(Color6);
-                         break;
-                 case 7: call.set_rgb(Color7);
-                         break;
-                 case 8: call.set_rgb(Color8);
-                         break;
-                 case 9: call.set_rgb(Color9);
-                         break;
-                 case 10: call.set_rgb(Color10);
-                          break;
-                 case 11: call.set_rgb(Color11);
-                          break;
-                 case 12: call.set_rgb(Color12);
-                          break;
-               }
-               call.set_brightness(0.01);
-              }
-               
-               state ++;
-               if (state == 2){
-               state = 0;
-               }
-               color++;
-               if(color == 13)
-               {
-                 color = 1;
-               }
-               call.perform();
-  
+- pulse:
+- pulse:
+   name: "Fast Pulse"
+   transition_length: 0.5s
+   update_interval: 0.5s
+- pulse:
+   name: "Slow Pulse"
+   # transition_length: 1s
+   # defaults to 1s
+   update_interval: 2s
+- random:
+- random:
+   name: Slow Random Effect
+   transition_length: 5s
+   update_interval: 7s 
+- strobe:
+- strobe:
+   name: policelight
+   colors:
+     - state: True
+       brightness: 100%
+       red: 100%
+       green: 0%
+       blue: 0%
+       duration: 125ms
+     - state: False
+       duration: 125ms
+     - state: True
+       brightness: 100%
+       red: 100%
+       green: 0%
+       blue: 0%
+       duration: 125ms
+     - state: False
+       duration: 125ms
+     - state: True
+       brightness: 100%
+       red: 100%
+       green: 0%
+       blue: 0%
+       duration: 125ms
+     - state: False
+       duration: 125ms
+     - state: True
+       brightness: 100%
+       red: 0%
+       green: 0%
+       blue: 100%
+       duration: 125ms
+     - state: False
+       duration: 125ms
+     - state: True
+       brightness: 100%
+       red: 0%
+       green: 0%
+       blue: 100%
+       duration: 125ms
+     - state: False
+       duration: 125ms
+     - state: True
+       brightness: 100%
+       red: 0%
+       green: 0%
+       blue: 100%
+       duration: 125ms
+     - state: False
+       duration: 125ms
+- strobe:
+   name: Christmas strobe
+   colors:
+     - state: True
+       brightness: 100%
+       red: 100%
+       green: 0%
+       blue: 0%
+       duration: 500ms
+     - state: False
+       duration: 250ms
+     - state: True
+       brightness: 100%
+       red: 0%
+       green: 100%
+       blue: 0%
+       duration: 500ms
+     - state: False
+       duration: 250ms
+     
+- flicker:
+- flicker:
+   name: halloween flicker
+   alpha: 80%
+   intensity: 5%
+   
+- flicker:
+   name: Flicker Effect With Custom Values
+   alpha: 95%
+   intensity: 1.5%          
+- lambda:
+   name: "Breathing"
+   update_interval: 16s
+   lambda: |-
+     static int state = 1;
+     static float brightness = 0.01;
+     auto values = id(rmt_rgb).current_values;
+     brightness = state == 1?values.get_brightness():brightness;
+     auto call = id(rmt_rgb).turn_on(); //the id of your light
+     call.set_transition_length(15000);
+     if (state == 0) 
+     {
+      call.set_brightness(brightness);
+     }
+      else if (state == 1)
+     {
+      call.set_brightness(0.01);
+     }
+      call.perform();
+      state ++;
+      if (state == 2){
+      state = 0;
+      }
+    
+- lambda:
+   name: "Colour Changing"
+   update_interval: 16s
+   lambda: |-
+     #define Color1 1.0, 0.0, 0.0 //These are the colors defined, feel free to change or extend the list
+     #define Color2 1.0, 0.5, 0.0 //if you extend the list, dont forget to add them in the switch loop below
+     #define Color3 1.0, 1.0, 0.0 //and remember to adjust the reset counter at the bottom
+     #define Color4 0.5, 1.0, 0.0
+     #define Color5 0.0, 1.0, 0.0
+     #define Color6 0.0, 1.0, 0.5
+     #define Color7 0.0, 1.0, 1.0
+     #define Color8 0.0, 0.5, 1.0
+     #define Color9 0.0, 0.0, 1.0
+     #define Color10 0.5, 0.0, 1.0
+     #define Color11 1.0, 0.0, 1.0
+     #define Color12 1.0, 0.0, 0.5
+     static int color = 1;
+     auto call = id(rmt_rgb).turn_on(); //the id of your light
+     call.set_transition_length(15000);
+      switch(color)
+      {
+        case 1: call.set_rgb(Color1);
+                break;
+        case 2: call.set_rgb(Color2);
+                break;
+        case 3: call.set_rgb(Color3);
+                break;
+        case 4: call.set_rgb(Color4);
+                break;
+        case 5: call.set_rgb(Color5);
+                break;
+        case 6: call.set_rgb(Color6);
+                break;
+        case 7: call.set_rgb(Color7);
+                break;
+        case 8: call.set_rgb(Color8);
+                break;
+        case 9: call.set_rgb(Color9);
+                break;
+        case 10: call.set_rgb(Color10);
+                 break;
+        case 11: call.set_rgb(Color11);
+                 break;
+        case 12: call.set_rgb(Color12);
+                 break;
+      }
+      color++;
+      if(color == 13)
+      {
+        color = 1;
+      }
+      call.perform();
+        
+- lambda:
+   name: "Colour Breathing"
+   update_interval: 16s
+   lambda: |-
+     static int state = 1;
+     static int color = 1;
+     static float brightness = 0.01;
+     auto values = id(rmt_rgb).current_values;
+     brightness = state == 1?values.get_brightness():brightness;
+     auto call = id(rmt_rgb).turn_on(); //the id of your light
+     call.set_transition_length(15000);
+     if (state == 0) 
+     {
+      call.set_brightness(brightness);
+     }
+      else if (state == 1)
+     {
+      switch(color)
+      {
+        case 1: call.set_rgb(Color1);
+                break;
+        case 2: call.set_rgb(Color2);
+                break;
+        case 3: call.set_rgb(Color3);
+                break;
+        case 4: call.set_rgb(Color4);
+                break;
+        case 5: call.set_rgb(Color5);
+                break;
+        case 6: call.set_rgb(Color6);
+                break;
+        case 7: call.set_rgb(Color7);
+                break;
+        case 8: call.set_rgb(Color8);
+                break;
+        case 9: call.set_rgb(Color9);
+                break;
+        case 10: call.set_rgb(Color10);
+                 break;
+        case 11: call.set_rgb(Color11);
+                 break;
+        case 12: call.set_rgb(Color12);
+                 break;
+      }
+      call.set_brightness(0.01);
+     }
+      
+      state ++;
+      if (state == 2){
+      state = 0;
+      }
+      color++;
+      if(color == 13)
+      {
+        color = 1;
+      }
+      call.perform();
+- lambda:
+   name: "Tardis Effect"
+   update_interval: 5 s
+   lambda: |-
+    #define Color13 0.03, 0.02, 1.0 
+    #define Color14 0.3, 0.3, 0.9 
+    #define Color15 0.4, 0.4, 0.9 
+    #define Color16 0.5, 0.5, 0.8
+    #define Color17 0.7, 0.7, 0.7
+    #define Color18 1.0, 1.0, 1.0 
+    #define Color19 0.7, 0.7, 0.7
+    #define Color20 0.5, 0.5, 0.8
+    #define Color21 0.5, 0.5, 0.9
+    #define Color22 0.4, 0.4, 0.9 
+    #define Color23 0.3, 0.3, 0.9
+    #define Color24 0.03, 0.02, 1.0
+    static int state = 0;
+    static int color = 1;
+    auto call = id(rmt_rgb).turn_on(); //put the id for your light in here
+    call.set_transition_length(4000);
+    if (state == 0) 
+    {
+     call.set_brightness(0.01);
+    
+    }
+     else if (state == 1)
+    {
+       switch(color)
+       {
+        case 1: call.set_rgb(Color13);
+                break;
+        case 2: call.set_rgb(Color14);
+                break;
+        case 3: call.set_rgb(Color15);
+                break;
+        case 4: call.set_rgb(Color16);
+                break;
+        case 5: call.set_rgb(Color17);
+                break;
+        case 6: call.set_rgb(Color18);
+                break;
+        case 7: call.set_rgb(Color19);
+                break;
+        case 8: call.set_rgb(Color20);
+                break;
+        case 9: call.set_rgb(Color21);
+                break;
+        case 10: call.set_rgb(Color22);
+                 break;
+        case 11: call.set_rgb(Color23);
+                 break;
+        case 12: call.set_rgb(Color24);
+                 break;
+       }
+     call.set_brightness(1.0);
+    }
+    
+    state ++;
+    if (state == 2){
+    state = 0;
+    }
+    color++;
+    if(color == 13)
+    {
+      color = 1;
+    }
+    call.perform();
